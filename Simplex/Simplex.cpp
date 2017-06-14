@@ -162,9 +162,10 @@ int _tmain(int argc, _TCHAR* argv[])
 				}
 
 				auto biggestCjzj = std::max_element(std::begin(cjzj), std::end(cjzj));
+
 				// Glowna petla
 				while (*biggestCjzj > 1) {	//	ZMIENNA
-					//cout << endl << "---------------" << iteration << " ITERACJA -----------------" << endl << endl;
+					cout << endl << endl << "----------------" << " ITERACJA ------------------" << endl << endl;
 
 					// Pozycja najwiekszego cjzj
 					auto biggestCJZJ = std::max_element(std::begin(cjzj), std::end(cjzj));
@@ -219,13 +220,38 @@ int _tmain(int argc, _TCHAR* argv[])
 
 					biggestCjzj = std::max_element(std::begin(cjzj), std::end(cjzj));
 
-					if (*biggestCjzj < 1) {
-						cout << endl << "All the elements are odd numbers.\n";
-					}
+					//if (*biggestCjzj < 1) {
+					//	cout << endl << "Optymalne rozwiazanie: ";
+					//}
 
 
 				}
 
+				cout << endl << endl;
+				cout << "================================" << endl;
+				cout << "============ WYNIKI ============" << endl;
+				cout << "================================" << endl;
+
+				cout << endl << endl << "Optymalne rozwiazanie: " << endl;
+				for (unsigned i = 0; i < receiversNumber; ++ i) {
+					cout << "x" << receiversNumber-i << ": " << SIMPLEX_TABLE(i, SIMPLEX_TABLE.size2()-1) << endl;
+				}
+
+				cout << endl << endl << "Przypadek optymalny to ";
+				for (unsigned i = 0; i < receiversNumber; ++ i) {
+					if (CB(0, i) != 0) {
+						cout << "dostawa " << SIMPLEX_TABLE(i, SIMPLEX_TABLE.size2()-1) << " ton od dostawcy " << receiversNumber-i << ", ";
+ 					}
+				}
+				for (unsigned i = 0; i < receiversNumber; ++ i) {
+					if (CB(0, i) == 0) {
+						cout << "zaoszczedzono " << SIMPLEX_TABLE(i, SIMPLEX_TABLE.size2()-1) << " ton od dostawcy " << receiversNumber-i << ", ";
+ 					}
+				}
+
+
+				cout << endl << endl << "Lacznie koszty wychodza: " << ZJ(0, ZJ.size2()-1);
+					
 
 
 
@@ -236,10 +262,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 
 
-
-
-
-					cout << endl << endl;
+					cout << endl << endl << endl;
 			}
 				break;
 			case 2: {
