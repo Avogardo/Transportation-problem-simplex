@@ -141,13 +141,6 @@ int _tmain(int argc, _TCHAR* argv[])
 					cjzj.push_back( requestion[i] - ZJ(0, i) );
 				}
 
-				/*std::vector < int > zmienne_bazowe_x;
-				for (unsigned i = 0; i < providersNumber+receiversNumber; ++ i) {
-					zmienne_bazowe_x.push_back( i );
-				}
-				for( size_t i = 0; i < zmienne_bazowe_x.size(); i++ )
-					printf( "%d, ", zmienne_bazowe_x[ i ] );*/
-
 				std::vector < int > zmienne_bazowe_y;
 				for (unsigned i = providersNumber; i < providersNumber+receiversNumber; ++ i) {
 					zmienne_bazowe_y.push_back( i );
@@ -168,10 +161,10 @@ int _tmain(int argc, _TCHAR* argv[])
 					column(BASEA, i) = column(SIMPLEX_TABLE, providersNumber+i);
 				}
 
-
+				auto biggestCjzj = std::max_element(std::begin(cjzj), std::end(cjzj));
 				// Glowna petla
-				for (unsigned iteration = 0; iteration < 2; ++ iteration) {	//	ZMIENNA
-					cout << endl << "---------------" << iteration << " ITERACJA -----------------" << endl << endl;
+				while (*biggestCjzj > 1) {	//	ZMIENNA
+					//cout << endl << "---------------" << iteration << " ITERACJA -----------------" << endl << endl;
 
 					// Pozycja najwiekszego cjzj
 					auto biggestCJZJ = std::max_element(std::begin(cjzj), std::end(cjzj));
@@ -224,7 +217,7 @@ int _tmain(int argc, _TCHAR* argv[])
 					// podmienienie starwej wartosci w A bazowej
 					column(BASEA, positionLowestBip) = column(SIMPLEX_TABLE, positionBiggestCJZJ);
 
-					auto biggestCjzj = std::max_element(std::begin(cjzj), std::end(cjzj));
+					biggestCjzj = std::max_element(std::begin(cjzj), std::end(cjzj));
 
 					if (*biggestCjzj < 1) {
 						cout << endl << "All the elements are odd numbers.\n";

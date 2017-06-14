@@ -80,3 +80,5 @@ $RECYCLE.BIN/
 
 Debug/
 *.sdf
+ipch/simplex-babcfe3a/simplex-3efe716e.ipch
+Simplex.sdf
