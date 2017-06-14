@@ -198,10 +198,6 @@ int _tmain(int argc, _TCHAR* argv[])
 					auto positionLowestBip = std::distance(std::begin(bip), lowestBip);
 					
 					column(BASEA, positionLowestBip) = column(SIMPLEX_TABLE, positionBiggestCJZJ);	//	ZMIENNA
-
-					//if(iteration != 0) {
-					//	column(BASEA, BASEA.size2()-iteration) = column(SIMPLEX_TABLE, iteration-1);
-					//}
 				cout << endl << endl << "BASEA" << BASEA;
 
 					//stworzenie A-bazowej odwrotnej
@@ -209,15 +205,12 @@ int _tmain(int argc, _TCHAR* argv[])
 					InvertMatrix(BASEA, INVERTA);
 				cout << endl << endl << "INVERTA" << INVERTA;
 
-					SIMPLEX_TABLE = prod(INVERTA, SIMPLEX_TABLE);
 					//Nadpisanie pierwszej tablicy simplexowej
-					//column(SIMPLEX_TABLE, iteration) = column(IDENTITY_MATRIX, IDENTITY_MATRIX.size2()-1-iteration);
-					//column(SIMPLEX_TABLE, SIMPLEX_TABLE.size2()-2-iteration) = column(INVERTA, INVERTA.size2()-1-iteration);
-					//column(SIMPLEX_TABLE, SIMPLEX_TABLE.size2()-1) = column(TEMP_PROD, TEMP_PROD.size2()-1);
+					SIMPLEX_TABLE = prod(INVERTA, SIMPLEX_TABLE);
 				cout << endl << endl << "Druga tablica simplex" << SIMPLEX_TABLE;
 
 					// Dostosowanie CB
-					CB(0, CB.size2()-1-iteration) = requestion[iteration];
+					CB(0, positionLowestBip) = requestion[positionBiggestCJZJ];
 				cout << endl << endl << "CB" << CB;
 
 					ZJ = prod(CB, SIMPLEX_TABLE);
