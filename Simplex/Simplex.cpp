@@ -163,6 +163,14 @@ int _tmain(int argc, _TCHAR* argv[])
 
 				auto biggestCjzj = std::max_element(std::begin(cjzj), std::end(cjzj));
 
+
+
+
+
+
+
+
+
 				// Glowna petla
 				while (*biggestCjzj > 1) {	//	ZMIENNA
 					cout << endl << endl << "----------------" << " ITERACJA ------------------" << endl << endl;
@@ -183,10 +191,19 @@ int _tmain(int argc, _TCHAR* argv[])
 					for( size_t i = 0; i < bip.size(); i++ )
 						printf( "%d, ", bip[ i ] );
 
-					//dostosowanie A bazowaj
+					//	pozycja najmniejszego bi/p
 					auto lowestBip = std::min_element(std::begin(bip), std::end(bip));
 					auto positionLowestBip = std::distance(std::begin(bip), lowestBip);
-					
+
+					cout << endl << "positionLowestBip: " << positionLowestBip << endl;
+					cout << endl << "positionBiggestCJZJ: " << positionBiggestCJZJ << endl;
+
+					zmienne_bazowe_y[positionLowestBip] = positionBiggestCJZJ;
+
+					for( size_t i = 0; i < zmienne_bazowe_y.size(); i++ )
+						printf( "%d, ", zmienne_bazowe_y[ i ] );
+
+					//dostosowanie A bazowaj
 					column(BASEA, positionLowestBip) = column(SIMPLEX_TABLE, positionBiggestCJZJ);	//	ZMIENNA
 				cout << endl << endl << "BASEA" << BASEA;
 
@@ -234,24 +251,24 @@ int _tmain(int argc, _TCHAR* argv[])
 
 				cout << endl << endl << "Optymalne rozwiazanie: " << endl;
 				for (unsigned i = 0; i < receiversNumber; ++ i) {
-					cout << "x" << receiversNumber-i << ": " << SIMPLEX_TABLE(i, SIMPLEX_TABLE.size2()-1) << endl;
+					cout << "x" << zmienne_bazowe_y[i]+1 << ": " << SIMPLEX_TABLE(i, SIMPLEX_TABLE.size2()-1) << endl;
 				}
 
 				cout << endl << endl << "Przypadek optymalny to ";
 				for (unsigned i = 0; i < receiversNumber; ++ i) {
 					if (CB(0, i) != 0) {
-						cout << "dostawa " << SIMPLEX_TABLE(i, SIMPLEX_TABLE.size2()-1) << " ton od dostawcy " << receiversNumber-i << ", ";
+						cout << "dostawa " << SIMPLEX_TABLE(i, SIMPLEX_TABLE.size2()-1) << " ton od dostawcy " << zmienne_bazowe_y[i]+1 << ", ";
  					}
 				}
 				for (unsigned i = 0; i < receiversNumber; ++ i) {
 					if (CB(0, i) == 0) {
-						cout << "zaoszczedzono " << SIMPLEX_TABLE(i, SIMPLEX_TABLE.size2()-1) << " ton od dostawcy " << receiversNumber-i << ", ";
+						cout << "zaoszczedzono " << SIMPLEX_TABLE(i, SIMPLEX_TABLE.size2()-1) << " ton od dostawcy " << zmienne_bazowe_y[i]+1 << ", ";
  					}
 				}
 
 
 				cout << endl << endl << "Lacznie koszty wychodza: " << ZJ(0, ZJ.size2()-1);
-					
+				cout << endl << "Z(x): " << ZJ(0, ZJ.size2()-1);	
 
 
 
